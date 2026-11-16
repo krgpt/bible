@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="개역개정 · NIV · KJV 성경 읽기와 단어 검색">
+<title>성경 검색 · 개역개정 / NIV / KJV</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="data/meta.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" id="brand">성경 검색</div>
+
+  <div class="trs" id="trToggles" role="group" aria-label="역본 선택"></div>
+
+  <div class="topactions">
+    <button id="backBtn" class="btn small backbtn" hidden title="읽던 곳으로 돌아가기">↩ <span class="lbl">읽던 곳</span></button>
+    <button id="themeBtn" class="icon-btn" title="밝게/어둡게" aria-label="테마 전환">◐</button>
+    <button id="searchBtn" class="btn primary" aria-haspopup="dialog">검색</button>
+  </div>
+</header>
+
+<nav class="refbar" aria-label="본문 위치">
+  <select id="bookSel" aria-label="성경(책)"></select>
+  <select id="chapSel" aria-label="장"></select>
+  <select id="verseSel" aria-label="절"></select>
+
+  <div class="navbtns">
+    <button id="prevBtn" class="icon-btn" title="이전 장" aria-label="이전 장">◀</button>
+    <button id="nextBtn" class="icon-btn" title="다음 장" aria-label="다음 장">▶</button>
+    <button id="copyChapter" class="icon-btn" title="이 장 전체 복사" aria-label="이 장 전체 복사">⧉</button>
+  </div>
+</nav>
+
+<main id="reader" class="reader" aria-live="polite">
+  <div class="loading">불러오는 중…</div>
+</main>
+
+<footer class="foot">
+  <span id="status"></span>
+  <span class="license">개역개정 © 대한성서공회 · NIV © Biblica · KJV Public Domain · 개인 열람용</span>
+</footer>
+
+<!-- 모바일 플로팅 검색 버튼 -->
+<button id="fab" class="fab" aria-label="검색 열기">🔍</button>
+
+<!-- 검색 패널 -->
+<aside id="panel" class="panel" hidden role="dialog" aria-modal="false" aria-labelledby="panelTitle">
+  <div class="panel-head">
+    <h2 id="panelTitle">검색</h2>
+    <button id="closePanel" class="icon-btn close" aria-label="검색 닫기" title="닫기">✕</button>
+  </div>
+
+  <div class="panel-body">
+    <section class="card">
+      <h3>단어 검색</h3>
+      <div class="wordrow">
+        <input id="q1" type="search" placeholder="단어 1" autocomplete="off" enterkeyhint="search">
+        <select id="op" aria-label="조건">
+          <option value="and">AND · 모두 포함</option>
+          <option value="or">OR · 하나만 포함</option>
+        </select>
+        <input id="q2" type="search" placeholder="단어 2 (선택)" autocomplete="off" enterkeyhint="search">
+      </div>
+
+      <div class="scope" id="scope" role="group" aria-label="검색할 역본"></div>
+
+      <div class="row">
+        <button id="doSearch" class="btn primary">검색</button>
+        <button id="clearSearch" class="btn">초기화</button>
+        <span id="searchInfo" class="muted"></span>
+      </div>
+      <p class="hint">영어는 대소문자를 구분하지 않습니다. 구절 전체를 넣어도 됩니다. 예) <code>사랑</code>, <code>faith</code>, <code>태초에 하나님이</code><br>결과의 <b>구절 제목</b>을 누르면 읽던 위치 그대로 미리보기, <b>↗</b>는 그 구절로 이동, <b>⧉</b>는 복사입니다.</p>
+    </section>
+
+    <section class="card">
+      <h3>성경 · 장 · 절 찾기</h3>
+      <div class="refrow">
+        <select id="sBook" aria-label="성경(책)"></select>
+        <select id="sChap" aria-label="장"></select>
+        <select id="sVerse" aria-label="절"></select>
+        <div class="refbtns">
+          <button id="peekBtn" class="btn primary" title="읽던 위치를 그대로 두고 이 구절만 미리 봅니다">미리보기</button>
+          <button id="goBtn" class="btn" title="이 구절로 본문을 옮깁니다">이동</button>
+        </div>
+      </div>
+      <p class="hint"><b>미리보기</b>는 읽던 위치를 그대로 둔 채 이 패널 안에서만 본문을 보여 줍니다. 원래 읽던 곳으로 돌아가려면 위쪽 <b>↩ 읽던 곳</b> 버튼을 누르세요.</p>
+    </section>
+
+    <section id="previewWrap" class="card preview" hidden aria-live="polite">
+      <div class="pv-head">
+        <div class="pv-title">
+          <strong id="pvRef">—</strong>
+          <span id="pvSub" class="muted"></span>
+        </div>
+        <div class="pv-nav">
+          <button id="pvPrev" class="icon-btn" title="이전 장" aria-label="미리보기 이전 장">◀</button>
+          <button id="pvNext" class="icon-btn" title="다음 장" aria-label="미리보기 다음 장">▶</button>
+          <button id="pvClose" class="icon-btn" title="미리보기 닫기" aria-label="미리보기 닫기">✕</button>
+        </div>
+      </div>
+      <div id="pvBody" class="pv-body"></div>
+      <div class="pv-foot">
+        <button id="pvGo" class="btn primary">이 위치에서 읽기</button>
+        <span class="muted pv-note">읽던 위치는 그대로 유지됩니다</span>
+      </div>
+    </section>
+
+    <section id="resultsWrap" class="results" hidden>
+      <div class="results-head">
+        <span id="resultCount"></span>
+        <button id="copyResults" class="btn small">결과 전체 복사</button>
+      </div>
+      <div id="results"></div>
+      <button id="moreBtn" class="btn wide" hidden>더 보기</button>
+    </section>
+  </div>
+</aside>
+
+<div id="scrim" class="scrim" hidden></div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
