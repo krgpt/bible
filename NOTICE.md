@@ -1,18 +1,21 @@
 # 저작권 및 데이터 출처 고지 (NOTICE)
 
-이 저장소는 **개인 열람·검색 용도**의 정적 성경 웹앱입니다. 비공개(private) 저장소로 운영을 전제로 하며, 성경 본문 데이터는 아래 출판사의 저작물입니다.
+이 저장소는 성경을 읽고 검색하는 정적 웹앱이며, 아래 주소에서 공개 운영 중입니다.
+
+- 사이트: **https://krgpt.github.io/bible/**
+- 저장소: https://github.com/krgpt/bible
 
 ## 성경 본문 데이터 (`data/*.js`, `build/patches.txt`)
 
 | 역본 | 저작권 |
 | --- | --- |
-| 개역개정 (KOR) | © 대한성서공회 (Korean Bible Society). All rights reserved. |
+| 개역개정 (KOR) | © 대한성서공회 (Korean Bible Society). 대한성서공회의 허락을 받아 게시합니다. |
 | NIV (New International Version) | © Biblica, Inc.™ All rights reserved worldwide. |
-| KJV (King James Version) | Public Domain (영국/미국 기준 저작권 만료) |
+| KJV (King James Version) | Public Domain |
 
-- 개역개정과 NIV 본문은 **개인적인 열람·연구 목적**으로만 사용합니다.
-- 본 저장소의 본문 데이터를 **복제·재배포·공개 게시(웹사이트 공개 포함)·상업적 이용**하는 것은 저작권자의 허가 없이는 허용되지 않습니다.
-- 저장소를 공개(public)로 전환하거나 GitHub Pages 등으로 본문을 게시하려면, 반드시 해당 저작권자의 이용 허락을 먼저 받아야 합니다.
+- 개역개정 본문은 **대한성서공회의 정식 허락**을 받아 공개 게시 중입니다.
+- NIV 본문은 Biblica의 저작물입니다. 공개 게시·재배포 범위는 Biblica의 이용 허락 조건을 따릅니다.
+- 본문 데이터를 복제·재배포하거나 상업적으로 이용하려는 경우, 해당 역본 저작권자의 별도 허락이 필요합니다.
 
 ## 코드 (`index.html`, `assets/*`, `build/*.py`)
 

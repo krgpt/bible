@@ -28,9 +28,15 @@ python -m http.server 8765 --bind 0.0.0.0
 ```
 휴대폰 브라우저에서 `http://<PC-IP>:8765/index.html`.
 
+### 온라인 접속 (GitHub Pages)
+**https://krgpt.github.io/bible/**
+
+GitHub Pages(`main` 브랜치 root)로 배포되어 있습니다. PC·휴대폰 어디서든 위 주소로 바로 열 수 있습니다.
+`main` 브랜치에 push하면 1~2분 내 자동으로 반영됩니다.
+
 ### 정적 호스팅
 `bible-webapp` 폴더 전체를 GitHub Pages / Netlify / S3 등에 그대로 올리면 됩니다.
-서버사이드 처리가 없습니다.
+서버사이드 처리가 없습니다. (Jekyll 처리 방지를 위해 `.nojekyll` 포함)
 
 ---
 
