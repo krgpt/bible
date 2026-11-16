@@ -666,6 +666,14 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1
 
   .wordrow { grid-template-columns: 1fr; }
   .wordrow select { justify-self: stretch; }
+
+  /* iOS Safari는 입력창 폰트가 16px 미만이면 포커스 시 화면을 자동 확대한다.
+     확대되면 전체화면 패널이 화면보다 커져 좌우로 밀어야 해서 16px로 고정. */
+  input[type="search"], input[type="text"], textarea { font-size: 16px; }
+
+  /* 어떤 요소도 가로로 삐져나와 화면이 흔들리지 않도록 */
+  html, body { overflow-x: clip; }
+
   /* 책 선택은 전체 폭, 장·절은 좁게, 버튼이 남는 폭을 채움 */
   .refbtns .btn { padding: 8px 4px; }
 
